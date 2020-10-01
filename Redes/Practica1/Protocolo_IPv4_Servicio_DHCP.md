@@ -132,7 +132,8 @@ Configurar Router y VM4 y comprobar su conectividad con el comando ​ping​.
 En el ROUTER:
 ```console
 [root@localhost ~]# ip l set eth1 up
-[root@localhost ~]# ip a add 172.16.0.1/16 dev eth1 [root@localhost ~]# ping -c 2 172.16.0.2
+[root@localhost ~]# ip a add 172.16.0.1/16 dev eth1 
+[root@localhost ~]# ping -c 2 172.16.0.2
 PING 172.16.0.2 (172.16.0.2) 56(84) bytes of data.
 64 bytes from 172.16.0.2: icmp_seq=1 ttl=64 time=0.370 ms 64 bytes from 172.16.0.2: icmp_seq=2 ttl=64 time=0.396 ms
 --- 172.16.0.2 ping statistics ---
@@ -142,7 +143,8 @@ PING 172.16.0.2 (172.16.0.2) 56(84) bytes of data.
 En la VM4:
 ```console
 [root@localhost ~]# ip l set eth0 up
-[root@localhost ~]# ip a add 172.16.0.2/16 dev eth0 [root@localhost ~]# ping -c 2 172.16.0.1
+[root@localhost ~]# ip a add 172.16.0.2/16 dev eth0 
+[root@localhost ~]# ping -c 2 172.16.0.1
 PING 172.16.0.1 (172.16.0.1) 56(84) bytes of data.
 64 bytes from 172.16.0.1: icmp_seq=1 ttl=64 time=0.528 ms 64 bytes from 172.16.0.1: icmp_seq=2 ttl=64 time=0.368 ms
 --- 172.16.0.1 ping statistics ---
@@ -167,14 +169,16 @@ Añadir Router como encaminador por defecto para VM1 y VM2. Usar el comando​ i
 
 En la VM1:
 ```console
-[root@localhost ~]# ip route add default via 192.168.0.1 [root@localhost ~]# ip route
+[root@localhost ~]# ip route add default via 192.168.0.1
+[root@localhost ~]# ip route
 default via 192.168.0.1 dev eth0
 192.168.0.0/24 dev eth0 proto kernel scope link src 192.168.0.2
 ```
 
 En la VM2:
 ```console
-[root@localhost ~]# ip route add default via 192.168.0.1 [root@localhost ~]# ip route
+[root@localhost ~]# ip route add default via 192.168.0.1
+[root@localhost ~]# ip route
 default via 192.168.0.1 dev eth0
 192.168.0.0/24 dev eth0 proto kernel scope link src 192.168.0.3
 ```
@@ -183,7 +187,8 @@ default via 192.168.0.1 dev eth0
 Aunque la configuración adecuada para la tabla de rutas en redes como las consideradas en esta práctica consiste en añadir una ruta por defecto, es posible incluir rutas para redes concretas. Añadir en VM4 una ruta a la red 192.168.0.0/24 via Router. Usar el comando ip route​.
 
 ```console
-[root@localhost ~]# ip route add 192.168.0.0/24 via 172.16.0.1 [root@localhost ~]# ip route
+[root@localhost ~]# ip route add 192.168.0.0/24 via 172.16.0.1 
+[root@localhost ~]# ip route
 172.16.0.0/16 dev eth0 proto kernel scope link src 172.16.0.2 192.168.0.0/24 via 172.16.0.1 dev eth0
 ```
 
@@ -266,7 +271,9 @@ subnet 172.16.0.0 netmask 255.255.0.0 {
 
 En el ROUTER:
 ```console
-[root@localhost dhcp]# systemctl start dhcpd.service [root@localhost dhcp]# systemctl status dhcpd.service ● dhcpd.service - DHCPv4 Server Daemon
+[root@localhost dhcp]# systemctl start dhcpd.service 
+root@localhost dhcp]# systemctl status dhcpd.service 
+● dhcpd.service - DHCPv4 Server Daemon
 Loaded: loaded (/usr/lib/systemd/system/dhcpd.service; disabled; vendor preset: disabled) Active: active (running) since Thu 2020-10-01 21:59:28 CEST; 6s ago
 Docs: man:dhcpd(8) man:dhcpd.conf(5)
 Main PID: 4458 (dhcpd)
@@ -297,7 +304,8 @@ D​urante el arranque del sistema se pueden configurar automáticamente interfa
 TYPE=Ethernet
 BOOTPROTO=none
 IPADDR=​<dirección IP estática en formato CIDR>
-GATEWAY=​<dirección IP estática del encaminador por defecto (si existe)> DEVICE=eth0
+GATEWAY=​<dirección IP estática del encaminador por defecto (si existe)>
+DEVICE=eth0
 ```
 
 **Nota**:​ Estas opciones se describen en detalle en ​/usr/share/doc/initscripts-*/sysconfig.txt​.
@@ -320,21 +328,25 @@ En la VM4:
 [root@localhost network-scripts]# ifup eth0
 
 Determining IP information for eth0... done.
-[root@localhost network-scripts]# ping -c 2 192.168.0.50 PING 192.168.0.50 (192.168.0.50) 56(84) bytes of data.
+[root@localhost network-scripts]# ping -c 2 192.168.0.50
+PING 192.168.0.50 (192.168.0.50) 56(84) bytes of data.
 64 bytes from 192.168.0.50: icmp_seq=1 ttl=63 time=1.30 ms 64 bytes from 192.168.0.50: icmp_seq=2 ttl=63 time=1.62 ms
 
 --- 192.168.0.50 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1002ms rtt min/avg/max/mdev = 1.308/1.466/1.624/0.158 ms [root@localhost network-scripts]# ping -c 2 192.168.0.51
+2 packets transmitted, 2 received, 0% packet loss, time 1002ms rtt min/avg/max/mdev = 1.308/1.466/1.624/0.158 ms
+[root@localhost network-scripts]# ping -c 2 192.168.0.51
 PING 192.168.0.51 (192.168.0.51) 56(84) bytes of data.
 64 bytes from 192.168.0.51: icmp_seq=1 ttl=63 time=0.886 ms 64 bytes from 192.168.0.51: icmp_seq=2 ttl=63 time=0.877 ms
 
 --- 192.168.0.51 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1000ms rtt min/avg/max/mdev = 0.877/0.881/0.886/0.030 ms [root@localhost network-scripts]# ping -c 2 192.168.0.1
+2 packets transmitted, 2 received, 0% packet loss, time 1000ms rtt min/avg/max/mdev = 0.877/0.881/0.886/0.030 ms 
+[root@localhost network-scripts]# ping -c 2 192.168.0.1
 PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.
 64 bytes from 192.168.0.1: icmp_seq=1 ttl=64 time=0.372 ms 64 bytes from 192.168.0.1: icmp_seq=2 ttl=64 time=0.532 ms
 
 --- 192.168.0.1 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1001ms rtt min/avg/max/mdev = 0.372/0.452/0.532/0.080 ms [root@localhost network-scripts]# ping -c 2 172.16.0.1
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms rtt min/avg/max/mdev = 0.372/0.452/0.532/0.080 ms
+[root@localhost network-scripts]# ping -c 2 172.16.0.1
 PING 172.16.0.1 (172.16.0.1) 56(84) bytes of data.
 64 bytes from 172.16.0.1: icmp_seq=1 ttl=64 time=0.412 ms 64 bytes from 172.16.0.1: icmp_seq=2 ttl=64 time=0.876 ms
 
