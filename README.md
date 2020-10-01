@@ -3,22 +3,30 @@
 
 # Asignatura: Ampliación de Sistemas Operativos y Redes <br> Subject: Extension for Operating Systems and Networks
 
-## Table of Content
+## Tabla de Contenidos
 
-1. [About this repo](#About-this-repo)
-2. [Author](#Author)
-3. [License](#License)
+1. [Contenido de este repo](#Contenido-de-este-repo)
+    - [Protocolo IPv4. Servicio DHCP](Redes/Practica1/Protocolo_IPv4_Servicio_DHCP.md)
 
-## About this repo.
+2. [Autor](#Autor)
+3. [Licencia](#Licencia)
 
-This repo contains all the code that I have done during the subject mentioned on the title. Hope you find this useful for studying.
+## Contenido de este repo
 
-All the `.topol` files contains the netwotrk topology for each practice.
+Este repo contiene los pasos a seguir para la realización de las prácticas de la asignatura antes mencionada. Espero que lo encuentres util para tu estudio.
 
-## Author.
+Este repo esta estructurado en dos carpetas, la primera, `Redes` contiene los pasos para realizar las practicas de los temas que corresponden al temario de redes y en la carpeta de `Sistemas Operativos` contiene los pasos para realizar las practicas de los temas que corresponden al temario de sistemas operativos.
+
+A continuacion encontrarán enlaces a cada una de las practicas:
+
+| Temario | Práctica |
+| :---    |  :---:   |
+| Redes   | [Protocolo IPv4. Servicio DHCP](Redes/Practica1/Protocolo_IPv4_Servicio_DHCP.md) |
+
+## Autor.
 
 [![GitHub followers](https://img.shields.io/github/followers/FrederickBor?label=%40FrederickBor&style=social)](https://github.com/FrederickBor)
 
-## License.
+## Licencia.
 
-The following code is distributed under MIT License. You read more details about it [here](LICENSE).
+El codigo presente en este repositio se encuentra bajo una Licencia MIT - Puede ver [LICENSE](LICENSE) para más detalles.
