@@ -40,13 +40,17 @@ En la VM1:
 ```console
 [root@localhost ~]# ip a
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 inet 127.0.0.1/8 scope host lo
-    valid_lft forever preferred_lft forever inet6 ::1/128 scope host
-    valid_lft forever preferred_lft forever
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00 
+    inet 127.0.0.1/8 scope host lo
+        valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host
+        valid_lft forever preferred_lft forever
 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
-    link/ether 08:00:27:14:62:1e brd ff:ff:ff:ff:ff:ff inet 192.168.0.2/24 scope global eth0
-    valid_lft forever preferred_lft forever inet6 fe80::a00:27ff:fe14:621e/64 scope link
-    valid_lft forever preferred_lft forever
+    link/ether 08:00:27:14:62:1e brd ff:ff:ff:ff:ff:ff
+    inet 192.168.0.2/24 scope global eth0
+        valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fe14:621e/64 scope link
+        valid_lft forever preferred_lft forever
 ```
 
 ### Ejercicio 2
@@ -93,9 +97,12 @@ En la VM1:
 ```console
 [root@localhost ~]# ping -c 2 192.168.0.3
 PING 192.168.0.3 (192.168.0.3) 56(84) bytes of data.
-64 bytes from 192.168.0.3: icmp_seq=1 ttl=64 time=0.519 ms 64 bytes from 192.168.0.3: icmp_seq=2 ttl=64 time=0.810 ms
+64 bytes from 192.168.0.3: icmp_seq=1 ttl=64 time=0.519 ms
+64 bytes from 192.168.0.3: icmp_seq=2 ttl=64 time=0.810 ms
+
 --- 192.168.0.3 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1000ms rtt min/avg/max/mdev = 0.519/0.664/0.810/0.147 ms
+2 packets transmitted, 2 received, 0% packet loss, time 1000ms
+rtt min/avg/max/mdev = 0.519/0.664/0.810/0.147 ms
 ```
 
 Captura de pantalla del wireshark:
@@ -108,7 +115,8 @@ Ejecutar de nuevo la orden ​ping entre VM1 y VM2 y, a continuación, comprobar
 En la VM1:
 ```console
 [root@localhost ~]# ip ne
-192.168.0.3 dev eth0 lladdr 08:00:27:52:aa:79 REACHABLE 192.168.0.1 dev eth0 lladdr 08:00:27:88:d8:e2 STALE
+192.168.0.3 dev eth0 lladdr 08:00:27:52:aa:79 REACHABLE
+192.168.0.1 dev eth0 lladdr 08:00:27:88:d8:e2 STALE
 ```
 
 En la VM2:
@@ -135,9 +143,12 @@ En el ROUTER:
 [root@localhost ~]# ip a add 172.16.0.1/16 dev eth1 
 [root@localhost ~]# ping -c 2 172.16.0.2
 PING 172.16.0.2 (172.16.0.2) 56(84) bytes of data.
-64 bytes from 172.16.0.2: icmp_seq=1 ttl=64 time=0.370 ms 64 bytes from 172.16.0.2: icmp_seq=2 ttl=64 time=0.396 ms
+64 bytes from 172.16.0.2: icmp_seq=1 ttl=64 time=0.370 ms
+64 bytes from 172.16.0.2: icmp_seq=2 ttl=64 time=0.396 ms
+
 --- 172.16.0.2 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 999ms rtt min/avg/max/mdev = 0.370/0.383/0.396/0.013 ms
+2 packets transmitted, 2 received, 0% packet loss, time 999ms
+rtt min/avg/max/mdev = 0.370/0.383/0.396/0.013 ms
 ```
 
 En la VM4:
@@ -146,9 +157,12 @@ En la VM4:
 [root@localhost ~]# ip a add 172.16.0.2/16 dev eth0 
 [root@localhost ~]# ping -c 2 172.16.0.1
 PING 172.16.0.1 (172.16.0.1) 56(84) bytes of data.
-64 bytes from 172.16.0.1: icmp_seq=1 ttl=64 time=0.528 ms 64 bytes from 172.16.0.1: icmp_seq=2 ttl=64 time=0.368 ms
+64 bytes from 172.16.0.1: icmp_seq=1 ttl=64 time=0.528 ms
+64 bytes from 172.16.0.1: icmp_seq=2 ttl=64 time=0.368 ms
+
 --- 172.16.0.1 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1000ms rtt min/avg/max/mdev = 0.368/0.448/0.528/0.080 ms
+2 packets transmitted, 2 received, 0% packet loss, time 1000ms
+rtt min/avg/max/mdev = 0.368/0.448/0.528/0.080 ms
 ```
 
 ## Encaminamiento Estatico
@@ -161,7 +175,8 @@ $ ​sudo sysctl net.ipv4.ip_forward=1
 
 En el ROUTER:
 ```console
-[root@localhost ~]# sysctl net.ipv4.ip_forward=1 net.ipv4.ip_forward = 1
+[root@localhost ~]# sysctl net.ipv4.ip_forward=1
+net.ipv4.ip_forward = 1
 ```
 
 ### Ejercicio 7
@@ -189,7 +204,8 @@ Aunque la configuración adecuada para la tabla de rutas en redes como las consi
 ```console
 [root@localhost ~]# ip route add 192.168.0.0/24 via 172.16.0.1 
 [root@localhost ~]# ip route
-172.16.0.0/16 dev eth0 proto kernel scope link src 172.16.0.2 192.168.0.0/24 via 172.16.0.1 dev eth0
+172.16.0.0/16 dev eth0 proto kernel scope link src 172.16.0.2
+192.168.0.0/24 via 172.16.0.1 dev eth0
 ```
 
 ### Ejercicio 9
@@ -272,16 +288,28 @@ subnet 172.16.0.0 netmask 255.255.0.0 {
 En el ROUTER:
 ```console
 [root@localhost dhcp]# systemctl start dhcpd.service 
-root@localhost dhcp]# systemctl status dhcpd.service 
+[root@localhost dhcp]# systemctl status dhcpd.service 
 ● dhcpd.service - DHCPv4 Server Daemon
-Loaded: loaded (/usr/lib/systemd/system/dhcpd.service; disabled; vendor preset: disabled) Active: active (running) since Thu 2020-10-01 21:59:28 CEST; 6s ago
-Docs: man:dhcpd(8) man:dhcpd.conf(5)
+    Loaded: loaded (/usr/lib/systemd/system/dhcpd.service; disabled; vendor preset: disabled)
+    Active: active (running) since Thu 2020-10-01 21:59:28 CEST; 6s ago
+        Docs: man:dhcpd(8)
+            man:dhcpd.conf(5)
 Main PID: 4458 (dhcpd)
-Status: "Dispatching packets..." CGroup: /system.slice/dhcpd.service
-└─4458 /usr/sbin/dhcpd -f -cf /etc/dhcp/dhcpd.conf -user dhcpd -gr...
+    Status: "Dispatching packets..."
+    CGroup: /system.slice/dhcpd.service
+        └─4458 /usr/sbin/dhcpd -f -cf /etc/dhcp/dhcpd.conf -user dhcpd -gr...
+
 Oct 01 21:59:28 localhost.localdomain dhcpd[4458]: All rights reserved.
 Oct 01 21:59:28 localhost.localdomain dhcpd[4458]: For info, please visit htt...
-Oct 01 21:59:28 localhost.localdomain dhcpd[4458]: Not searching LDAP since l... Oct 01 21:59:28 localhost.localdomain dhcpd[4458]: Wrote 0 leases to leases f... Oct 01 21:59:28 localhost.localdomain dhcpd[4458]: Listening on LPF/eth1/08:0... Oct0121:59:28localhost.localdomaindhcpd[4458]:Sendingon LPF/eth1/08:0... Oct 01 21:59:28 localhost.localdomain dhcpd[4458]: Listening on LPF/eth0/08:0... Oct0121:59:28localhost.localdomaindhcpd[4458]:Sendingon LPF/eth0/08:0... Oct0121:59:28localhost.localdomaindhcpd[4458]:Sendingon Socket/fallba... Oct 01 21:59:28 localhost.localdomain systemd[1]: Started DHCPv4 Server Daemon. Hint: Some lines were ellipsized, use -l to show in full.
+Oct 01 21:59:28 localhost.localdomain dhcpd[4458]: Not searching LDAP since l... 
+Oct 01 21:59:28 localhost.localdomain dhcpd[4458]: Wrote 0 leases to leases f... 
+Oct 01 21:59:28 localhost.localdomain dhcpd[4458]: Listening on LPF/eth1/08:0... 
+Oct 01 21:59:28 localhost.localdomain dhcpd[4458]: Sendingon LPF/eth1/08:0... 
+Oct 01 21:59:28 localhost.localdomain dhcpd[4458]: Listening on LPF/eth0/08:0... 
+Oct 01 21:59:28 localhost.localdomain dhcpd[4458]: Sendingon LPF/eth0/08:0... 
+Oct 01 21:59:28 localhost.localdomain dhcpd[4458]: Sendingon Socket/fallba...
+Oct 01 21:59:28 localhost.localdomain systemd[1]: Started DHCPv4 Server Daemon. 
+Hint: Some lines were ellipsized, use -l to show in full.
 ```
 
 ### Ejercicio 12
@@ -294,8 +322,27 @@ Iniciar una captura de paquetes en Router. Arrancar el cliente DHCP en VM1 con �
 |0.0.0.0|255.255.255.255|Request|(53) DHCP Message Type <br> (54) DHCP Server Identifier <br> (50) Requested IP Address <br> (55) Parameter Request List <br> (255) End|
 |192.168.0.1|192.168.0.50|ACK|(53) DHCP Message Type <br> (54) DHCP Server Identifier <br> (51) IP Address Lease Time <br> (1) Subnet Mask <br> (28) Broadcast Address <br> (3) Router <br> (255) End|
 
-Captura de pantalla del wireshark:
+Captura de pantalla del wireshark en ROUTER:
 ![Ejercicio12](Assets/Ejercicio12.png)
+
+
+En la VM1:
+```console
+[root@localhost ~]# dhclient -d eth0
+Internet Systems Consortium DHCP Client 4.2.5
+Copyright 2004-2013 Internet Systems Consortium.
+All rights reserved.
+For info, please visit https://www.isc.org/software/dhcp/
+
+Listening on LPF/eth0/08:00:27:14:62:1e
+Sending on LPF/eth0/08:00:27:14:62:1e
+Sending on Socket/fallback
+DHCPDISCOVER on eth0 to 255.255.255.255 port 67 interval 4 (xid=0x39099ad)
+DHCPREQUEST on eth0 to 255.255.255.255 port 67 (xid=0x39099ad)
+DHCPOFFER from 192.168.0.1
+DHCPACK from 192.168.0.1 (xid=0x39099ad)
+bound to 192.168.0.50 -- renewal in 19160 seconds.
+```
 
 ### Ejercicio 13
 D​urante el arranque del sistema se pueden configurar automáticamente interfaces según la información almacenada en el disco del servidor (configuración persistente). Consultar el fichero ​/etc/sysconfig/network-scripts/ifcfg-eth0 de VM4, que configura automáticamente eth0​ usando DHCP. Para configuración estática, se usarían las siguientes opciones:
@@ -311,7 +358,8 @@ DEVICE=eth0
 **Nota**:​ Estas opciones se describen en detalle en ​/usr/share/doc/initscripts-*/sysconfig.txt​.
 
 ```console
-[root@localhost network-scripts]# cat ifcfg-eth0 TYPE=Ethernet
+[root@localhost network-scripts]# cat ifcfg-eth0
+TYPE=Ethernet
 BOOTPROTO=dhcp
 DEFROUTE=yes
 NAME=eth0
@@ -330,26 +378,34 @@ En la VM4:
 Determining IP information for eth0... done.
 [root@localhost network-scripts]# ping -c 2 192.168.0.50
 PING 192.168.0.50 (192.168.0.50) 56(84) bytes of data.
-64 bytes from 192.168.0.50: icmp_seq=1 ttl=63 time=1.30 ms 64 bytes from 192.168.0.50: icmp_seq=2 ttl=63 time=1.62 ms
+64 bytes from 192.168.0.50: icmp_seq=1 ttl=63 time=1.30 ms
+64 bytes from 192.168.0.50: icmp_seq=2 ttl=63 time=1.62 ms
 
 --- 192.168.0.50 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1002ms rtt min/avg/max/mdev = 1.308/1.466/1.624/0.158 ms
+2 packets transmitted, 2 received, 0% packet loss, time 1002ms
+rtt min/avg/max/mdev = 1.308/1.466/1.624/0.158 ms
 [root@localhost network-scripts]# ping -c 2 192.168.0.51
 PING 192.168.0.51 (192.168.0.51) 56(84) bytes of data.
-64 bytes from 192.168.0.51: icmp_seq=1 ttl=63 time=0.886 ms 64 bytes from 192.168.0.51: icmp_seq=2 ttl=63 time=0.877 ms
+64 bytes from 192.168.0.51: icmp_seq=1 ttl=63 time=0.886 ms
+64 bytes from 192.168.0.51: icmp_seq=2 ttl=63 time=0.877 ms
 
 --- 192.168.0.51 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1000ms rtt min/avg/max/mdev = 0.877/0.881/0.886/0.030 ms 
+2 packets transmitted, 2 received, 0% packet loss, time 1000ms
+rtt min/avg/max/mdev = 0.877/0.881/0.886/0.030 ms 
 [root@localhost network-scripts]# ping -c 2 192.168.0.1
 PING 192.168.0.1 (192.168.0.1) 56(84) bytes of data.
-64 bytes from 192.168.0.1: icmp_seq=1 ttl=64 time=0.372 ms 64 bytes from 192.168.0.1: icmp_seq=2 ttl=64 time=0.532 ms
+64 bytes from 192.168.0.1: icmp_seq=1 ttl=64 time=0.372 ms
+64 bytes from 192.168.0.1: icmp_seq=2 ttl=64 time=0.532 ms
 
 --- 192.168.0.1 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1001ms rtt min/avg/max/mdev = 0.372/0.452/0.532/0.080 ms
+2 packets transmitted, 2 received, 0% packet loss, time 1001ms
+rtt min/avg/max/mdev = 0.372/0.452/0.532/0.080 ms
 [root@localhost network-scripts]# ping -c 2 172.16.0.1
 PING 172.16.0.1 (172.16.0.1) 56(84) bytes of data.
-64 bytes from 172.16.0.1: icmp_seq=1 ttl=64 time=0.412 ms 64 bytes from 172.16.0.1: icmp_seq=2 ttl=64 time=0.876 ms
+64 bytes from 172.16.0.1: icmp_seq=1 ttl=64 time=0.412 ms
+64 bytes from 172.16.0.1: icmp_seq=2 ttl=64 time=0.876 ms
 
 --- 172.16.0.1 ping statistics ---
-2 packets transmitted, 2 received, 0% packet loss, time 1002ms rtt min/avg/max/mdev = 0.412/0.644/0.876/0.232 ms
+2 packets transmitted, 2 received, 0% packet loss, time 1002ms
+rtt min/avg/max/mdev = 0.412/0.644/0.876/0.232 ms
 ```
