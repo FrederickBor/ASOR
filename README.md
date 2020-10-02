@@ -29,4 +29,4 @@ A continuacion encontrarán enlaces a cada una de las practicas:
 
 ## Licencia.
 
-El codigo presente en este repositio se encuentra bajo una Licencia MIT - Puede ver [LICENSE](LICENSE) para más detalles.
+El codigo presente en este repositio se encuentra bajo una Licencia GPL-3.0 - Puede ver [LICENSE](LICENSE) para más detalles.
