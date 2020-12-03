@@ -20,8 +20,13 @@ Este repo esta estructurado en dos carpetas, la primera, `Redes` contiene los pa
 A continuacion encontrarán enlaces a cada una de las practicas:
 
 | Temario | Práctica |
-| :---    |  :---:   |
+| :---    |  :---   |
 | Redes   | [Protocolo IPv4. Servicio DHCP](Redes/Practica1/Protocolo_IPv4_Servicio_DHCP.md) |
+| Redes   | [Conceptos Avanzados de TCP]() |
+| Redes   | [Domain Name System (DNS)]() |
+| Redes   | [Protocolo IPv6]() |
+| Redes   | [RIP y BGP]() |
+| Sistemas Operativos | [Introducción a la programación de sistemas UNIX](Sistemas\ Operativos/Practica2.1) |
 
 ## Autor.
 
