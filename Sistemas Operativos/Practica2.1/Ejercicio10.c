@@ -19,7 +19,7 @@ int main(int argc, char const *argv[])
     euid = geteuid();
     printf("UID efectivo: %i\n", euid);
 
-    // Firma  de la llamada:
+    // Firma de la llamada:
     // struct passwd *getpwuid(uid_t uid);
 
     user = getpwuid(uid);
