@@ -27,7 +27,7 @@ int main(int argc, char const *argv[])
         perror("Error in open");
 
     fd2 = dup2(fd, 1);
-    printf("Redirecting exit to %s\n", argv[1]);
+    printf("Redirecting exit to %s\n", path);
 
     dup2(fd2, fd);
 
