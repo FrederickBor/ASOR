@@ -1,0 +1,32 @@
+// include necesario para uso de getpid
+#include <unistd.h>
+// include necesario para el uso de printf
+#include <stdio.h>
+
+int main(int argc, char const *argv[])
+{
+    int rc;
+
+    pid_t pid,
+          ppid,
+          pgid,
+          sid;
+
+    pid = getpid();
+    ppid = getppid();
+    pgid = getpgid(pid);
+    sid = getsid(pid);
+
+    printf("CURRENT PROCESS INFORMATION:\n \
+        \tPID: %i\n \
+        \tParent PID: %i\n \
+        \tProcess Group ID: %i\n \
+        \tSession ID: %i\n",
+        pid,
+        ppid,
+        pgid,
+        sid
+    );
+    
+    return 0;
+}
