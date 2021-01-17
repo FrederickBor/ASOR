@@ -29,18 +29,21 @@ int main(int argc, char const *argv[])
 
     switch (fork_pid)
     {
-    case 0: // HIJO
-        dup2(fd[PIPE_R],0);
-        close(fd[PIPE_W]);
-        close(fd[PIPE_R]);
-        execlp(argv[3],argv[3],argv[4]);
-        break;
-    default: // Padre
-        dup2(fd[PIPE_W],1);
-        close(fd[PIPE_W]);
-        close(fd[PIPE_R]);
-        execlp(argv[1],argv[2],argv[2]);
-        break;
+        case -1:
+            perror("Error in fork");
+            break;
+        case 0: // HIJO
+            dup2(fd[PIPE_R],0);
+            close(fd[PIPE_W]);
+            close(fd[PIPE_R]);
+            execlp(argv[3], argv[3], argv[4]);
+            break;
+        default: // Padre
+            dup2(fd[PIPE_W],1);
+            close(fd[PIPE_W]);
+            close(fd[PIPE_R]);
+            execlp(argv[1], argv[1], argv[2]);
+            break;
     }
 
     return 0;
