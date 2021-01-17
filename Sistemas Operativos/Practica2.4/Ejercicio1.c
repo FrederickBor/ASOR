@@ -13,6 +13,7 @@ int main(int argc, char const *argv[])
 {
     if (argc < 5){
         printf("ERROR: correct use %s [command1] [argument1] [command2] [argument2]", argv[0]);
+        return -1;
     }
 
     int fd[2];
