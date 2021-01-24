@@ -4,8 +4,11 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <sys/types.h>
-// includes necesarios para el uso de inet_ntop
-#include <arpa/inet.h>
+// includes necesarios para el uso de sockets
+#include <sys/types.h>
+#include <sys/socket.h>
+// include necesario para close
+#include <unistd.h>
 
 #define MAX_MESSAGE 2
 #define MAX_SIZE_MSG 255
@@ -38,6 +41,8 @@ int main(int argc, char const *argv[])
     int sd;
     sd = socket(result->ai_family, result->ai_socktype, 0);
 
+    bind(sd, (struct sockaddr *)result->ai_addr, result->ai_addrlen);
+
     char buf[MAX_MESSAGE];
     char host[NI_MAXHOST];
     char serv[NI_MAXSERV];
@@ -57,6 +62,8 @@ int main(int argc, char const *argv[])
     }
 
     freeaddrinfo(result);
+
+    close(sd);
     
     return 0;
 }
